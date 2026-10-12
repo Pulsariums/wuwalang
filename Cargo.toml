@@ -1,0 +1,25 @@
+[package]
+name = "wuwalang"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "Wuthering Waves Türkçe çeviri modu"
+
+[dependencies]
+anyhow = "1"
+eframe = "0.29"
+clap = { version = "4", features = ["derive"] }
+regex = "1"
+rfd = "0.15"
+rusqlite = { version = "0.32", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha1 = "0.10"
+sha2 = "0.10"
+ureq = { version = "2", features = ["json"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_System_Diagnostics_ToolHelp", "Win32_UI_Input_KeyboardAndMouse", "Win32_System_Console", "Win32_UI_WindowsAndMessaging"] }

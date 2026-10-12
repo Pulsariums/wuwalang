@@ -1,0 +1,29 @@
+
+# Makineye özel ayarlar ve gizli anahtarlar
+# Oyun verisi, çeviri belleği, çıktı ve günlükler
+# Python
+# Üretilen ikililer ve dış araçlar
+*.db
+*.log
+*.pak
+*.py[cod]
+*.sqlite3
+*.tmp
+.env
+.env.*
+.pytest_cache/
+.venv/
+/config.json
+/data/
+/output/
+/packs/.cache/
+/tm.db
+__pycache__/
+config.json
+conflicts.log
+data/
+packs/.cache/
+target/
+tm.db
+tools/
+venv/
