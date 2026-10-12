@@ -1,78 +1,78 @@
+<div align="center">
+
 # WuwaLang
 
-Wuthering Waves için Türkçe çeviri paketi. Oyunun İngilizce veritabanlarındaki metinleri
-çeviri motorlarıyla (Yandex, Google, OpenAI uyumlu veya Anthropic) Türkçeye çevirir,
-yerel bir çeviri belleğinde saklar ve oyunun kendi paket formatında (WuWa V12) derleyip kurar.
+**Wuthering Waves için tek exe'li, topluluk destekli Türkçe çeviri modu.**
 
-## Lisans ve atıf
+[![Build](https://github.com/Pulsariums/wuwalang/actions/workflows/release.yml/badge.svg)](https://github.com/Pulsariums/wuwalang/actions/workflows/release.yml)
+[![Lisans: GPL-3.0](https://img.shields.io/badge/lisans-GPL--3.0--or--later-blue.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/platform-Windows-0078D6.svg)](#gereksinimler)
+[![Rust](https://img.shields.io/badge/Rust-stable-DEA584.svg?logo=rust&logoColor=white)](Cargo.toml)
 
-- Bu proje **GPL-3.0-or-later** lisanslıdır; tam metin [LICENSE](LICENSE) dosyasındadır.
-- Temel alınan kaynak: [GishReloaded/WuWaRu](https://github.com/GishReloaded/WuWaRu) (GPL-3.0-or-later).
-  `src/game.rs` (kurulum, çıkarma, derleme, kurma) ve `src/pak.rs` (WuWa V12 paket yazıcısı) bu projeden uyarlanmıştır.
-  Çeviri motoru katmanı, sözlük, çeviri belleği, arayüz ve CLI bu projeye özgüdür.
-- Oyun verisini okumak için kullanılan FModelCLI v1.0.2 (GPL-3.0) `wuwalang setup` komutuyla resmi sürümden indirilir
-  ve SHA-256 ile doğrulanır. İkili dosya depoya eklenmez.
-  Bkz. https://github.com/Herselfta/FModelCLI
-- Wuthering Waves ve ilgili tüm varlıklar Kuro Games'in mülkiyetindedir. Bu proje bir resmi ürün değildir.
+[Site](https://pulsariums.github.io/wuwalang/) · [İndir](https://github.com/Pulsariums/wuwalang/releases) · [Actions](https://github.com/Pulsariums/wuwalang/actions)
 
-## Uyarı
+<p>
+  <img src="docs/img/durum.png" width="46%" alt="WuwaLang Durum sekmesi: oyun, paket, çeviri belleği ve yüzde durumu">
+  <img src="docs/img/ceviri.png" width="46%" alt="WuwaLang Çeviri sekmesi: motor seçimi, tahmin ve çeviri denetimi">
+</p>
 
-Kuro Games'in Fair Play kuralları oyun verisinin değiştirilmesini yasaklar. Bu aracı kullanmanın
-riski (hesap kısıtlaması dahil) tamamen kullanıcıya aittir. Ana hesabınızla kullanmayın; ayrı bir hesap tercih edin.
+</div>
 
-## Hızlı başlangıç (exe)
+## Özellikler
 
-1. `wuwalang.exe` dosyasına argüman vermeden çift tıklayın; kurulum penceresi açılır.
-2. **Gözat** ile `Wuthering Waves.exe` (veya `Client-Win64-Shipping.exe`) dosyasını seçin.
-3. İlk açılışta Fair Play uyarısını okuyup onaylayın.
-4. Çeviri sekmesinden bir API anahtarı girip **Çevir** ile eksik metinleri çevirin (ilk kurulumda gerekli). Çeviri otomatik başlamaz.
-5. **Kur** düğmesine basın: araçlar, çıkarma, topluluk paketi, derleme ve kurulum tek seferde yapılır. Kur çeviri yapmaz, yalnızca mevcut çeviri belleğini kullanır; çeviri belleği boşsa paket kurulmaz.
-6. Oyunu açmadan önce kapatın; kaldırmak için **Kaldır** kullanın.
+- API anahtarlı çeviri: Yandex, Google, OpenAI uyumlu ve Anthropic uyumlu motorlar
+- 19 hedef dil; her dil için ayrı çeviri belleği, sözlük ve paket klasörü
+- Çeviri belleği ile tekrarlanan metinler bir kez çevrilir; istekler toplu gönderilir, veri trafiği küçük kalır
+- Sözlük otomatik büyür, ancak yalnızca gerçek özel isim ve oyun terimlerini ekler (karakter, yer, grup, eşya, beceri, mekanik); isimler olduğu gibi kalır
+- Topluluk çeviri paketlerini dışa aktarma, içe aktarma ve repodan çekme
+- Düzenleyici ile elle düzeltme; elle girilen çeviri otomatik çeviriyle üzerine yazılmaz
+- Oyunun yüzde kaçının çevrildiğini gösteren gösterge
+- Otomatik yedek; oyun güncellemesinden sonra çeviri kaybolmaz, yalnızca yeni ya da değişen metinler çevrilir
+- Aktif et / Devre dışı bırak ile çeviriyi tek tıkla aç ve kapat; çeviri sırasında Durdur
+- F7 ile açılan ayrı pencere bindirmesi; oyuna enjeksiyon yok, oyun belleğine dokunulmaz
 
-## İndirme
+## Kurulum
 
-- Hazır derleme: GitHub Releases sayfasından `wuwalang.exe` dosyasını indirin.
-- Kaynaktan derleme (Rust araç zinciri gerekir):
+1. [Releases](https://github.com/Pulsariums/wuwalang/releases) sayfasından `wuwalang.exe` dosyasını indirin.
+2. Dosyaya argüman vermeden çift tıklayın; kurulum penceresi açılır.
+3. **Gözat** ile `Wuthering Waves.exe` (veya `Client-Win64-Shipping.exe`) dosyasını seçin.
+4. İlk açılışta Fair Play uyarısını okuyup onaylayın.
+5. Çeviri sekmesinde bir API anahtarı girin ve **Çevir** ile metinleri çevirin.
+6. **Kur** düğmesine basın. Araçlar, çıkarma, topluluk paketi, derleme ve kurulum tek seferde yapılır.
 
-```powershell
-cargo build --release
-```
-
-Derlenen dosya `target\release\wuwalang.exe` yoluna çıkar.
+> **Not:** Kur çeviri yapmaz; yalnızca mevcut çeviri belleğini kullanır. Çeviri belleği boşsa paket kurulmaz.
+> Oyunu açmadan önce kapatın. Kaldırmak için **Kaldır** düğmesini kullanın.
 
 ## Gereksinimler
 
-- Windows 10/11 (oyun ve kurulum Windows içindir; Linux'ta yalnızca metin/çeviri adımları ve testler çalışır)
+- Windows 10 veya 11 (oyun ve kurulum Windows içindir; Linux'ta yalnızca metin/çeviri adımları ve testler çalışır)
 - Yüklü ve güncel Wuthering Waves (Steam veya resmi başlatıcı)
 
-## Araçların hazırlanması
+## Nasıl çalışır
 
-```powershell
-wuwalang setup
-```
+1. `setup` FModelCLI'yi indirip SHA-256 ile doğrular ve `pakkeys.txt` anahtar dosyasını hazırlar; `extract` oyundan İngilizce veritabanlarını çıkarır.
+2. `translate` eksik metinleri seçili motorla çevirir. Sonuçlar SQLite tabanlı çeviri belleğinde saklanır; sözlük ve önceki çeviriler tutarlılığı korur.
+3. `build` çeviri belleğinden WuWa V12 biçiminde `pakchunk0-WuwaLang_900_P.pak` dosyasını derler ve doğrular.
+4. `install` paketi oyunun pak klasörüne yerleştirir ve mount satırını ekleyerek paketi İngilizce dil yuvasından (`Lang_en/WuwaLang`) yükletir.
+5. Oyunda dil ayarı İngilizce kalır; Türkçe metinler bu yuvadan okunur. `uninstall` paketi kaldırıp İngilizceyi geri yükler.
 
-`setup` FModelCLI'yi indirir ve doğrular, `pakkeys.txt` anahtar dosyasını hazırlar. Araçlar
-`tools` altına yazılır. `extract` komutu bu dosyalar eksikse onları kendiliğinden hazırlar.
-Oyun güncellemesinden sonra anahtarları yenilemek için `wuwalang setup --refresh-keys` çalıştırın.
-Arayüzde de **Kur** sekmesindeki **Araçları hazırla** düğmesi aynı işi yapar.
+## Çeviri motorları
 
-## API anahtarı ve yapılandırma
+| Motor       | Ortam değişkeni       | Gereken ek ayar                              | Tür                         |
+|-------------|-----------------------|----------------------------------------------|-----------------------------|
+| `yandex`    | `WWTR_YANDEX_API_KEY` | `yandex.folder_id`                           | Makine çevirisi             |
+| `google`    | `WWTR_GOOGLE_API_KEY` | Cloud Translation v2                         | Makine çevirisi             |
+| `openai`    | `WWTR_OPENAI_API_KEY` | `openai.base_url`, `openai.model`            | Yapay zekâ (OpenAI uyumlu)  |
+| `anthropic` | `WWTR_ANTHROPIC_API_KEY` | `anthropic.model`                         | Yapay zekâ (Anthropic)      |
 
-`config.example.json` dosyasını `config.json` olarak kopyalayın (git'e eklenmez). Anahtarlar
-dosyada tutulabilir ya da ortam değişkeni olarak verilebilir:
-
-| Motor       | Ortam değişkeni                | Not                                           |
-|-------------|--------------------------------|-----------------------------------------------|
-| `yandex`    | `WWTR_YANDEX_API_KEY`          | `yandex.folder_id` da gerekir                 |
-| `google`    | `WWTR_GOOGLE_API_KEY`          | Cloud Translation v2                          |
-| `openai`    | `WWTR_OPENAI_API_KEY`          | `openai.base_url` ve `openai.model` gerekir   |
-| `anthropic` | `WWTR_ANTHROPIC_API_KEY`       | `anthropic.model` gerekir                     |
+Anahtarlar `config.json` içinde ya da ortam değişkeni olarak verilebilir. Başlangıç için
+`config.example.json` dosyasını `config.json` olarak kopyalayın (git'e eklenmez).
 
 Yandex ve Google makine çevirisidir: etiketler ve sözlük terimleri jetonlarla korunur.
-OpenAI uyumlu ve Anthropic motorları yapay zekâ çevirisidir: model, yeni karşılaşılan özel
-isimleri `new_terms` alanında önerir; bu öneriler `glossary.json` dosyasına eklenir.
+OpenAI uyumlu ve Anthropic motorları yapay zekâ çevirisidir: model, yeni karşılaşılan özel isimleri
+`new_terms` alanında önerir; bu öneriler `glossary.json` dosyasına eklenir.
 
-## Akış
+## Komut satırı
 
 ```powershell
 wuwalang setup                      # FModelCLI ve pakkeys.txt hazırla (bir kez)
@@ -84,8 +84,22 @@ wuwalang build                      # çeviri belleğinden paketi derle ve doğr
 wuwalang install                    # paketi oyuna kur (oyun kapalıyken)
 ```
 
-Kurulumdan sonra oyunda dil olarak **English** seçilir; Türkçe metinler bu dil yuvasından yüklenir.
-`uninstall` komutu paketi kaldırıp İngilizce dili geri yükler.
+| Komut | Açıklama |
+|-------|----------|
+| `setup [--refresh-keys]` | Araçları hazırlar; oyun güncellenmişse anahtarları yeniler |
+| `extract [--force]` | İngilizce veritabanlarını çıkarır; `--force` sürüm değişmese de yeniden çıkarır |
+| `translate [--engine E] [--limit N] [--dry-run]` | Eksik metinleri çevirir; `--dry-run` API çağırmadan tahmin yazar |
+| `build` | Çeviri belleğinden paketi derler ve doğrular |
+| `install` / `uninstall` | Paketi kurar / kaldırır ve İngilizce dili geri yükler |
+| `enable` / `disable` | Kurulu paketi etkinleştirir / devre dışı bırakır (paket dosyası kalır) |
+| `langs` | Desteklenen hedef dilleri listeler (`*` etkin dil) |
+| `import-pack [--dir DIR]` | Topluluk paketini çeviri belleğine alır |
+| `export-pack [--dir DIR]` | Çeviri belleğini topluluk paketi olarak dışa aktarır |
+| `pull-pack [--url URL]` | Paketi repodan çekip çeviri belleğine alır |
+| `backup` / `backup list` | Çeviri belleğini yedekler / yedekleri listeler |
+| `restore <dosya>` | Yedekten geri yükler (mevcut hali önce yedeklenir) |
+| `glossary list` / `add TERİM KARŞILIK [--locked]` / `lock TERİM` / `clean [--dry-run]` | Sözlüğü yönetir |
+| `ui` | Oyun üstü WuwaLang menüsünü (F7) açar |
 
 ### Oyun güncellemesinden sonra
 
@@ -98,24 +112,17 @@ wuwalang build
 wuwalang install
 ```
 
-Kaynak metni değişen satırlar paketten atlanır ve yeniden çevrilir.
-
-Çeviri, kaynak veya paket işlemi bittiğinde değişiklik varsa çeviri belleği otomatik yedeklenir (bkz. Yedekler).
-Bu yüzden güncellemeden önce `wuwalang backup` ile de elle bir yedek alabilirsiniz.
+Kaynak metni değişen satırlar paketten atlanır ve yeniden çevrilir. Çeviri, kaynak ya da paket işlemi
+bittiğinde değişiklik varsa çeviri belleği otomatik yedeklenir; güncellemeden önce `wuwalang backup`
+ile de elle yedek alabilirsiniz.
 
 ## Sözlük
 
-```powershell
-wuwalang glossary list
-wuwalang glossary add "Rover" "Gezgin" --locked
-wuwalang glossary lock "Jiyan"
-```
-
-Kilitli terimler otomatik önerilerle değişmez. Modelin farklı bir karşılık önerdiği durumlar
-`conflicts.log` dosyasına yazılır; mevcut karar korunur. Sözlük `glossary.json` dosyasındadır.
-
 Sözlüğe yalnızca özel isimler girer: karakter, yer, grup, eşya, beceri ve oyun mekaniği terimleri.
-Modelin önerdiği girdi en fazla 4 kelime olmalı ve cümle işareti içermemelidir; aksi halde atlanır.
+Kilitli terimler otomatik önerilerle değişmez. Modelin farklı bir karşılık önerdiği durumlar
+`conflicts.log` dosyasına yazılır ve mevcut karar korunur. Modelin önerdiği girdi en fazla 4 kelime
+olmalı ve cümle işareti içermemelidir; aksi halde atlanır.
+
 Eski sürümden kalan cümle benzeri girdiler için:
 
 ```powershell
@@ -123,38 +130,23 @@ wuwalang glossary clean --dry-run   # yalnızca say ve listele
 wuwalang glossary clean             # geçersiz ve kilitsiz girdileri sil (önce yedek alınır)
 ```
 
-Kilitli girdiler her durumda korunur.
+Sözlük `glossary.json` dosyasındadır. Kilitli girdiler her durumda korunur.
 
-## Topluluk paketi
+## Topluluk paketleri
 
-Çeviri belleği `packs/tr/<tablo>.jsonl` dosyalarına dışa aktarılabilir:
-
-```powershell
-wuwalang export-pack
-```
-
+Paketler `packs/<dil>/` klasöründe, her tablo için bir `.jsonl` dosyası ve bir `index.json` olarak tutulur.
 Her satır `{"id": "<dosya>:<tablo>:<kimlik>", "src": "...", "tr": "..."}` biçimindedir.
 
-## Paketler
+- `export-pack` çeviri belleğini paket olarak yazar ve `index.json` dosyasını (tablo adı, sha1, satır sayısı) üretir.
+- `import-pack` yerel klasördeki paketi çeviri belleğine alır.
+- `pull-pack` `index.json` üzerinden repodaki paketi çeker. Değişmeyen dosyalar (sha1, `packs/.cache`) indirilmez.
+  Varsayılan adres `config.json` içindeki `pack_url` alanıdır.
+- Arayüzdeki **Paketler** sekmesi aynı işlemleri yapar. Kur sırasında önce yerel paket içe aktarılır, `pack_url`
+  doluysa repodan çekilmeyi dener; çekme başarısız olursa yalnızca uyarı yazılır.
 
-- `export-pack` ayrıca `packs/tr/index.json` yazar: tablo dosyalarının adı, sha1 ve satır sayısı.
-- `import-pack` yerel klasörden paketi çeviri belleğine alır.
-- `pull-pack [--url URL]` `index.json` üzerinden repodaki paketi çeker. Değişmeyen dosyalar (sha1, `packs/.cache`) indirilmez. Varsayılan URL `config.json` içindeki `pack_url` alanıdır.
-- Arayüzdeki Paketler sekmesi aynı işlemleri yapar. Kur sırasında önce yerel paket içe aktarılır, ardından `pack_url` doluysa repodan çekilmeyi dener. Çekme başarısız olursa yalnızca uyarı yazılır. Kur çeviri başlatmaz; çevrilmemiş metinleri çevirmek için Çeviri sekmesindeki **Çevir** kullanılır. Kur bittiğinde çevrili oran günlüğe yazılır, çevrilmeyen metinler oyunda İngilizce kalır.
-
-## Yedekler
-
-```powershell
-wuwalang backup                       # çeviri belleğinin yedeğini al
-wuwalang backup list                  # yedekleri tarih, kayıt sayısı ve boyutla listele
-wuwalang restore backups\tm.tr.<tarih>.db   # yedekten geri yükle (mevcut hali önce yedeklenir)
-```
-
-Yedekler `backups\tm.<kod>.<YYYYMMDD-HHMMSS>.db` olarak yazılır (saat UTC) ve SQLite'ın çevrimiçi
-yedekleme komutuyla alınır. Dil başına en fazla 10 yedek tutulur. Otomatik yedek; çeviri bittiğinde
-ya da durdurulduğunda, Kur, Kaldır ve Derle öncesinde, çeviri belleğinde değişiklik varsa alınır.
-Kaynak veritabanı çıkarılmışsa topluluk paketi (`packs\<kod>\`) de aynı anda yazılır. Elle düzeltilen
-kayıtlar yedekte ve pakette korunur.
+**Paylaşmak için:** çevirinizi `export-pack` ile dışa aktarın ve değişikliği bir
+[çekme isteği](https://github.com/Pulsariums/wuwalang/pulls) ya da bir [sorun](https://github.com/Pulsariums/wuwalang/issues)
+olarak iletin.
 
 ## Arayüz (F7)
 
@@ -162,38 +154,57 @@ kayıtlar yedekte ve pakette korunur.
 wuwalang ui
 ```
 
-Oyunun üstünde küçük bir durum etiketi açılır; **F7** ile menü açılıp kapanır. Etiket
-`WuwaLang aktif (tr) · F7`, `WuwaLang pasif · F7` ya da `WuwaLang kurulu değil · F7` olarak görünür.
-Menüde:
+Oyunun sağ üst köşesinde küçük bir durum etiketi açılır (`WuwaLang aktif (tr) · F7`); **F7** ile menü açılıp kapanır.
+Menüde oyun yolu, hedef dil, çevrilme yüzdesi (`X / Y`), motor ve anahtar ayarları, sözlük, düzenleyici,
+yedekler ve paketler bulunur. Elle düzeltilen metin oyunda geçtiği her yerde değişir; oyuna yansıması için
+**Yeniden derle ve kur** gerekir.
 
-- Üstte oyunun çevrilme yüzdesi (`X / Y`). Yalnızca çıkarılmış oyun verisi üzerinden hesaplanır; oyun
-  güncellenip yeni metin gelince yüzde düşer. Çeviri sırasında partiler bittikçe güncellenir.
-- Oyun yolu ve **Hedef dil** seçimi. Seçim `config.json` içindeki `target` alanına kaydedilir; çeviri
-  belleği, sözlük ve paket klasörleri dile göre ayrılır.
-- Durum kartları (oyun, paket, TM kaydı, sözlük terimi, hedef dil, motor, yüzde) ve **Kur**, **Kaldır**,
-  **Aktif et / Devre dışı bırak**, **Yeniden derle ve kur** düğmeleri. Engelli bir düğmenin üzerine gelince
-  nedeni görünür.
-- **Çeviri**: motor ve anahtar alanları (anahtarı göster/gizle), **Bağlantıyı dene**, **Tahmin**,
-  **Çevir**, **Durdur**. Durdurulan çeviri biten kısımları kayıtlı bırakır.
-- **Sözlük**: anlık arama, filtre, yerinde düzenleme, kilit ve silme (onaylı), yeni terim ve
-  **Sözlüğü temizle**.
-- **Düzenleyici**: çeviri belleğinde kaynak ya da çeviri araması, elle düzeltme ve **Sıfırla**
-  (yeniden çevrilsin). Elle düzeltilen metin oyunda geçtiği her yerde değişir; oyuna yansıması için
-  **Yeniden derle ve kur** gerekir. Etiket ya da `{0}` kümesi uyuşmazsa uyarı çıkar ve onay istenir.
-- **Yedek**: şimdi yedekle, listele, geri yükle (onaylı).
-- **Paketler**: dışa aktar, içe aktar, repodan çek, derle.
+Bindirme yalnızca **Borderless** ya da **Windowed** modda görünür; özel tam ekran modunda görünmez.
+Oyuna enjeksiyon yapılmaz, oyun belleğine dokunulmaz; arayüz kendi sürecinde çalışır.
 
-Bindirme oyun penceresinin sağ üst köşesinde ayrı bir pencere olarak durur. Oyunun **Borderless** ya da
-**Windowed** modda olması gerekir; özel tam ekran modunda bindirme görünmez. Oyuna enjeksiyon yapılmaz,
-oyun belleğine dokunulmaz; arayüz kendi sürecinde çalışır.
-
-## Testler
+## Yedekler
 
 ```powershell
+wuwalang backup                               # çeviri belleğinin yedeğini al
+wuwalang backup list                          # yedekleri tarih, kayıt sayısı ve boyutla listele
+wuwalang restore backups\tm.tr.<tarih>.db     # yedekten geri yükle (mevcut hali önce yedeklenir)
+```
+
+Yedekler `backups\tm.<kod>.<YYYYMMDD-HHMMSS>.db` olarak yazılır (saat UTC) ve SQLite'ın çevrimiçi yedekleme
+komutuyla alınır. Dil başına en fazla 10 yedek tutulur. Otomatik yedek; çeviri bittiğinde ya da durdurulduğunda,
+Kur, Kaldır ve Derle öncesinde, çeviri belleğinde değişiklik varsa alınır. Elle düzeltilen kayıtlar yedekte ve
+pakette korunur.
+
+## Kaynaktan derleme
+
+Rust araç zinciri gerekir:
+
+```powershell
+cargo build --release
 cargo test
 ```
 
-Testler ağa çıkmaz; HTTP çağrıları taklit edilir.
+Derlenen dosya `target\release\wuwalang.exe` yoluna çıkar. Testler ağa çıkmaz; HTTP çağrıları taklit edilir.
+
+## Sık sorulan sorular
+
+**Hesabım yasaklanır mı?** Hesap riski vardır ve bu riski kullanıcı üstlenir. Oyun verilerinin değiştirilmesi
+Kuro Games'in Fair Play kurallarına aykırıdır; bir yaptırım olmayacağını garanti edemeyiz. Ana hesabınızla kullanmayın.
+
+**Oyuna müdahale ediyor mu?** Hayır. Çalışan oyun sürecine enjeksiyon yapılmaz; çeviri oyunun kendi dil paketi
+mekanizmasıyla kurulur.
+
+**Oyun güncellenince ne olur?** Önceki çeviriler yeniden kullanılır; yalnızca yeni ya da değişen metinler çevrilir.
+
+**Nasıl kaldırılır?** **Kaldır** düğmesiyle ya da `wuwalang uninstall` ile. Oyun İngilizce dile döner.
+
+**API anahtarım güvende mi?** Anahtarlar yalnızca seçtiğiniz sağlayıcıya gönderilir. Sağlayıcının panelinden
+harcama sınırı koymanızı ve anahtarı kimseyle paylaşmamanızı öneririz.
+
+## Uyarı
+
+Kuro Games'in Fair Play kuralları oyun verisinin değiştirilmesini yasaklar. Bu aracın kullanımından doğabilecek
+riskler (hesap kısıtlaması dahil) tamamen kullanıcıya aittir. Ana hesabınızla kullanmayın; ayrı bir hesap tercih edin.
 
 ## Proje yapısı
 
@@ -213,6 +224,12 @@ Testler ağa çıkmaz; HTTP çağrıları taklit edilir.
 | `packs/tr/`            | Topluluk çeviri paketi                                     |
 | `glossary.json`        | Sözlük                                                     |
 
-## Lisans
+## Lisans ve atıf
 
-Bu proje GPL-3.0-or-later altında dağıtılır. Ayrıntılar için [LICENSE](LICENSE) dosyasına bakın.
+- Bu proje **GPL-3.0-or-later** lisanslıdır; tam metin [LICENSE](LICENSE) dosyasındadır.
+- Temel alınan kaynak: [GishReloaded/WuWaRu](https://github.com/GishReloaded/WuWaRu) (GPL-3.0-or-later).
+  `src/game.rs` (kurulum, çıkarma, derleme, kurma) ve `src/pak.rs` (WuWa V12 paket yazıcısı) bu projeden uyarlanmıştır.
+  Çeviri motoru katmanı, sözlük, çeviri belleği, arayüz ve CLI bu projeye özgüdür.
+- Oyun verisini okumak için kullanılan FModelCLI v1.0.2 (GPL-3.0) `wuwalang setup` komutuyla resmi sürümden indirilir
+  ve SHA-256 ile doğrulanır. İkili dosya depoya eklenmez. Bkz. <https://github.com/Herselfta/FModelCLI>
+- Wuthering Waves ve ilgili tüm varlıklar Kuro Games'in mülkiyetindedir. Bu proje resmi bir ürün değildir.

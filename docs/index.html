@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WuwaLang - Wuthering Waves Türkçe Çeviri Modu</title>
-  <meta name="description" content="WuwaLang, Wuthering Waves için açık kaynaklı çeviri modu. Kendi API anahtarınla yapay zekâ ya da makine çevirisi kullanır, topluluk çeviri paketlerini destekler. Oyunun dil ayarına dokunmadan kurulur.">
+  <meta name="description" content="WuwaLang, Wuthering Waves için tek exe'li, açık kaynaklı çeviri modu. Kendi API anahtarınla makine ya da yapay zekâ çevirisi kullanır, topluluk paketlerini destekler.">
+  <meta name="theme-color" content="#0f0f1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f5f6fb" media="(prefers-color-scheme: light)">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:site_name" content="WuwaLang">
   <meta property="og:title" content="WuwaLang - Wuthering Waves Türkçe Çeviri Modu">
-  <meta property="og:description" content="Wuthering Waves için açık kaynaklı, API anahtarlı çeviri modu. Topluluk paketleri, tutarlı isimler ve güncellemede yalnızca yeni metinlerin çevrilmesi.">
+  <meta property="og:description" content="Wuthering Waves için tek exe'li, topluluk destekli çeviri modu. Kendi API anahtarınla çevir, topluluk paketlerini kullan, güncellemede yalnızca yeni metinleri çevir.">
+  <meta property="og:url" content="https://pulsariums.github.io/wuwalang/">
+  <meta property="og:image" content="https://pulsariums.github.io/wuwalang/img/durum.png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="ust">
   <a class="skip" href="#icerik">İçeriğe geç</a>
 
   <header class="topbar">
@@ -22,79 +26,83 @@
       <nav aria-label="Sayfa bölümleri">
         <a href="#ozellikler">Özellikler</a>
         <a href="#nasil">Nasıl çalışır</a>
-        <a href="#motorlar">Motorlar</a>
-        <a href="#paketler">Paketler</a>
+        <a href="#galeri">Ekran görüntüleri</a>
         <a href="#sss">SSS</a>
+        <a href="https://github.com/Pulsariums/wuwalang" rel="noopener">GitHub</a>
       </nav>
     </div>
   </header>
 
   <main id="icerik">
-    <section class="hero" id="ust">
-      <div class="wrap hero-grid">
-        <div class="hero-text">
-          <p class="eyebrow">Wuthering Waves için açık kaynak çeviri modu</p>
-          <h1>WuwaLang</h1>
-          <p class="lead">Oyunun metinlerini kendi API anahtarınla Türkçeye çeviren, topluluk paketlerini destekleyen açık kaynaklı bir modifikasyon aracı.</p>
-          <div class="cta">
-            <a class="btn btn-primary" href="https://github.com/Pulsariums/wuwalang/releases/latest">İndir</a>
-            <a class="btn btn-ghost" href="https://github.com/Pulsariums/wuwalang">GitHub</a>
-          </div>
-          <p class="note">Kuro Games ile bağlantılı değildir. Kullanmadan önce <a href="#sss">Sık sorulanlar</a> bölümündeki hesap riski uyarısını okuyun.</p>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow">Wuthering Waves için açık kaynak çeviri modu</p>
+        <h1>WuwaLang</h1>
+        <p class="lead">Wuthering Waves için tek exe'li, topluluk destekli Türkçe çeviri modu. Metinleri kendi API anahtarınla çevirir, topluluk paketlerini kullanmanı sağlar.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://github.com/Pulsariums/wuwalang/releases">İndir</a>
+          <a class="btn btn-ghost" href="https://github.com/Pulsariums/wuwalang" rel="noopener">GitHub</a>
         </div>
+        <p class="note">Kuro Games ile bağlantılı değildir. Kullanmadan önce <a href="#sss">SSS</a> bölümündeki hesap riski uyarısını oku.</p>
 
-        <div class="mock" role="img" aria-label="WuwaLang arayüzünün çizim örneği: solda İngilizce metin, sağda Türkçe çeviri">
-          <div class="mock-bar"><span></span><span></span><span></span><em>WuwaLang</em></div>
-          <div class="mock-body">
-            <div class="mock-row"><div class="mock-src">Rover, we need to move.</div><div class="mock-dst">Rover, hareket etmemiz gerek.</div></div>
-            <div class="mock-row"><div class="mock-src">The Tacet Field is unstable.</div><div class="mock-dst">Tacet Alanı kararsız.</div></div>
-            <div class="mock-row"><div class="mock-src">Stay close to the anchor.</div><div class="mock-dst">Çapaya yakın kal.</div></div>
-            <div class="mock-foot"><span class="pill pill-on">Etkin</span><span class="pill">19 dil</span><span class="pill">Taslak düzenleyici</span></div>
-          </div>
-        </div>
+        <figure class="frame">
+          <img src="img/durum.png" width="600" height="760" alt="WuwaLang Durum sekmesi: oyun yolu, paket durumu, çeviri belleği kaydı ve çevrilme yüzdesi">
+        </figure>
       </div>
     </section>
 
     <section class="section" id="ozellikler" aria-labelledby="ozellikler-baslik">
       <div class="wrap">
         <h2 id="ozellikler-baslik">Özellikler</h2>
-        <p class="section-lead">Çeviri kendi anahtarınla, kendi bilgisayarında çalışır. Aracın yaptığı işler tek tek görünür ve geri alınabilir.</p>
+        <p class="section-lead">Çeviri kendi anahtarınla, kendi bilgisayarında çalışır. Yapılan her işlem görünür ve geri alınabilir.</p>
         <div class="grid">
           <article class="card">
             <h3>API anahtarlı çeviri</h3>
             <p>Yandex, Google, OpenAI uyumlu ve Anthropic uyumlu uç noktalar desteklenir. Anahtarlar sana aittir.</p>
           </article>
           <article class="card">
-            <h3>Topluluk çeviri paketleri</h3>
-            <p>Paketleri içe ve dışa aktarabilir, başkalarının çevirisini kullanabilir ya da kendi çevirinle katkı verebilirsin.</p>
+            <h3>Tek exe kurulum</h3>
+            <p>Tek bir dosyayla kurulur ve aynı dosyayla kaldırılır. Kaldırma sonrasında oyun İngilizceye döner.</p>
           </article>
           <article class="card">
-            <h3>19 dil seçeneği</h3>
-            <p>Hedef dili listeden seçersin. Her dil için ayrı çeviri ve sözlük kullanılabilir.</p>
-          </article>
-          <article class="card">
-            <h3>Tek exe kurulum ve kaldırma</h3>
-            <p>Tek bir dosyayla kurulur, aynı dosyayla kaldırılır. Kaldırma sonrasında oyun İngilizceye döner.</p>
-          </article>
-          <article class="card">
-            <h3>Aktif ve pasif mod</h3>
-            <p>Çeviriyi tek anahtarla açıp kapatırsın. Pasif moddayken oyun orijinal metinlerini gösterir.</p>
-          </article>
-          <article class="card">
-            <h3>Çeviri düzenleyici</h3>
-            <p>Makine ya da yapay zekâ çevirisini gözden geçirip elle düzeltebilir, beğenmediğin satırları yeniden çevirtebilirsin.</p>
-          </article>
-          <article class="card">
-            <h3>Otomatik yedek</h3>
-            <p>Çeviri dosyaları değişmeden önce yedeklenir. Bir sorun olursa önceki sürüme dönebilirsin.</p>
+            <h3>Çeviri belleği</h3>
+            <p>Tekrarlanan metinler bir kez çevrilir, istekler toplu gönderilir. API kullanımı ve bekleme süresi küçük kalır.</p>
           </article>
           <article class="card">
             <h3>Tutarlı isimler</h3>
-            <p>Sözlük sayesinde karakter ve terim adları her yerde aynı çevrilir. Rover her zaman Rover olarak kalır.</p>
+            <p>Sözlük karakter, yer ve terim adlarını her yerde aynı çevirir. Sözlük yalnızca gerçek özel isimleri ve oyun terimlerini ekler.</p>
+          </article>
+          <article class="card">
+            <h3>Düzenleyici</h3>
+            <p>Makine ya da yapay zekâ çevirisini gözden geçirip elle düzeltebilirsin. Elle girdiğin çeviri otomatik çeviriyle üzerine yazılmaz.</p>
+          </article>
+          <article class="card">
+            <h3>Topluluk paketleri</h3>
+            <p>Paketleri içe ve dışa aktarabilir, başkalarının çevirisini kullanabilir ya da kendi düzeltmelerini paylaşabilirsin.</p>
+          </article>
+          <article class="card">
+            <h3>19 hedef dil</h3>
+            <p>Hedef dili listeden seçersin. Her dil için ayrı çeviri belleği, sözlük ve paket klasörü kullanılır.</p>
+          </article>
+          <article class="card">
+            <h3>Otomatik yedek</h3>
+            <p>Çeviri belleği değişmeden önce yedeklenir. Önceki bir sürüme dönmek tek komutla yapılır.</p>
           </article>
           <article class="card">
             <h3>Güncellemede yalnızca yeni metinler</h3>
             <p>Oyun güncellenince tüm metinler yeniden çevrilmez. Yalnızca yeni ya da değişen metinler işlenir.</p>
+          </article>
+          <article class="card">
+            <h3>Aktif ve pasif mod</h3>
+            <p>Çeviriyi tek düğmeyle açıp kapatırsın. Pasif moddayken oyun orijinal metinlerini gösterir.</p>
+          </article>
+          <article class="card">
+            <h3>F7 menüsü</h3>
+            <p>Oyunun üstünde ayrı bir pencere olarak açılır. Oyuna enjeksiyon yapılmaz, oyun belleğine dokunulmaz.</p>
+          </article>
+          <article class="card">
+            <h3>Çevrilme yüzdesi</h3>
+            <p>Oyunun ne kadarının çevrildiğini menüde görürsün. Oyun güncellenip yeni metin gelince yüzde düşer.</p>
           </article>
         </div>
       </div>
@@ -102,35 +110,28 @@
 
     <section class="section alt" id="nasil" aria-labelledby="nasil-baslik">
       <div class="wrap">
-        <h2 id="nasil-baslik">Nasıl çalışır</h2>
-        <p class="section-lead">Dört adımda kurulum tamamlanır. Oyunun dili İngilizce kalır; çeviri oyunun kendi dil paketi mekanizmasıyla devreye girer.</p>
+        <h2 id="nasil-baslik">3 adımda kurulum</h2>
+        <p class="section-lead">Oyunun dil ayarı İngilizce kalır. Türkçe metinler oyunun kendi dil paketi mekanizmasıyla yüklenir.</p>
         <ol class="steps">
           <li class="step">
             <span class="step-no" aria-hidden="true">1</span>
             <div>
-              <h3>Oyun yolunu seç</h3>
-              <p>Wuthering Waves kurulum klasörünü gösterirsin. WuwaLang yalnızca bu klasördeki dil dosyalarıyla ilgilenir.</p>
+              <h3>İndir ve çalıştır</h3>
+              <p>Releases sayfasından <code>wuwalang.exe</code> dosyasını indirip çift tıkla. Kurulum penceresi açılır; oyunun <code>Wuthering Waves.exe</code> dosyasını seç ve Fair Play uyarısını onayla.</p>
             </div>
           </li>
           <li class="step">
             <span class="step-no" aria-hidden="true">2</span>
             <div>
-              <h3>API anahtarını gir</h3>
-              <p>Kullanmak istediğin motorun anahtarını girersin. Anahtar yalnızca kendi bilgisayarında saklanır.</p>
+              <h3>Çevir</h3>
+              <p>Çeviri sekmesinde motorunu ve API anahtarını gir, <strong>Çevir</strong> ile eksik metinleri çevir. Çeviri otomatik başlamaz.</p>
             </div>
           </li>
           <li class="step">
             <span class="step-no" aria-hidden="true">3</span>
             <div>
-              <h3>Çevir</h3>
-              <p>Metinler parti parti çevrilir. Sözlük ve önceki çeviriler tutarlılığı korur, sonuçları düzenleyiciden kontrol edebilirsin.</p>
-            </div>
-          </li>
-          <li class="step">
-            <span class="step-no" aria-hidden="true">4</span>
-            <div>
               <h3>Kur</h3>
-              <p>Çeviri paketini oyuna kurarsın. Oyunda dil ayarı İngilizce kalır; WuwaLang gerektiğinde açıp kapatabileceğin bir pakettir.</p>
+              <p><strong>Kur</strong> düğmesi paketi derleyip oyuna yerleştirir. Kur çeviri yapmaz; yalnızca mevcut çeviri belleğini kullanır. Oyunu açmadan önce kapalı tut.</p>
             </div>
           </li>
         </ol>
@@ -140,7 +141,7 @@
     <section class="section" id="motorlar" aria-labelledby="motorlar-baslik">
       <div class="wrap">
         <h2 id="motorlar-baslik">Çeviri motorları</h2>
-        <p class="section-lead">Hangi motoru kullanacağına sen karar verirsin. Her motorun ücretlendirmesi ve kullanım koşulları ilgili sağlayıcıya aittir.</p>
+        <p class="section-lead">Hangi motoru kullanacağına sen karar verirsin. Ücretlendirme ve kullanım koşulları ilgili sağlayıcıya aittir.</p>
         <div class="grid grid-4">
           <article class="card engine">
             <h3>Yandex</h3>
@@ -148,7 +149,7 @@
           </article>
           <article class="card engine">
             <h3>Google</h3>
-            <p>Google Cloud Çeviri API anahtarıyla makine çevirisi.</p>
+            <p>Google Cloud Translation API anahtarıyla makine çevirisi.</p>
           </article>
           <article class="card engine">
             <h3>OpenAI uyumlu</h3>
@@ -162,22 +163,57 @@
       </div>
     </section>
 
+    <section class="section alt" id="galeri" aria-labelledby="galeri-baslik">
+      <div class="wrap">
+        <h2 id="galeri-baslik">Ekran görüntüleri</h2>
+        <p class="section-lead">Durum, çeviri, sözlük ve düzenleyici sekmeleri.</p>
+        <div class="gallery">
+          <figure class="shot">
+            <img src="img/durum.png" width="600" height="760" loading="lazy" alt="Durum sekmesi: oyun, paket, çeviri belleği ve yüzde kartları">
+            <figcaption>Durum</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/ceviri.png" width="900" height="810" loading="lazy" alt="Çeviri sekmesi: motor seçimi, tahmin, çevir ve durdur düğmeleri">
+            <figcaption>Çeviri</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/sozluk.png" width="900" height="810" loading="lazy" alt="Sözlük sekmesi: arama, filtre, kilit ve yeni terim alanları">
+            <figcaption>Sözlük</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/duzenleyici.png" width="600" height="760" loading="lazy" alt="Düzenleyici sekmesi: kaynak ve çeviri araması ile elle düzeltme alanı">
+            <figcaption>Düzenleyici</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diller" aria-labelledby="diller-baslik">
+      <div class="wrap">
+        <h2 id="diller-baslik">19 hedef dil</h2>
+        <p class="section-lead">Türkçe varsayılandır. Diğer dilleri aynı arayüzden seçebilirsin.</p>
+        <ul class="langs" aria-label="Desteklenen diller">
+          <li>Türkçe</li><li>Русский</li><li>Deutsch</li><li>Français</li><li>Español</li><li>Português</li><li>Português do Brasil</li><li>Italiano</li><li>Bahasa Indonesia</li><li>العربية</li><li>日本語</li><li>한국어</li><li>简体中文</li><li>Polski</li><li>Українська</li><li>Tiếng Việt</li><li>ไทย</li><li>Nederlands</li><li>हिन्दी</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="section alt" id="paketler" aria-labelledby="paketler-baslik">
       <div class="wrap">
         <h2 id="paketler-baslik">Topluluk paketleri</h2>
-        <p class="section-lead">Çeviri paketleri, oyuncuların birlikte hazırladığı dosyalardır. Bir paketi içe aktarıp kullanabilir, kendi düzeltmelerini dışa aktarıp paylaşabilirsin.</p>
+        <p class="section-lead">Paketler topluluğun birlikte hazırladığı çeviri dosyalarıdır. Bir paketi içe aktarıp kullanabilir, kendi düzeltmelerini dışa aktarıp paylaşabilirsin.</p>
         <div class="grid grid-3">
           <article class="card">
             <h3>1. Dışa aktar</h3>
-            <p>Çevirini paket olarak dışa aktarırsın ve dosyayı kendin paylaşabilirsin.</p>
+            <p>Çevirini paket olarak dışa aktar ve dosyayı kendin paylaş.</p>
           </article>
           <article class="card">
             <h3>2. Depoya gönder</h3>
-            <p>Değişikliğini <a href="https://github.com/Pulsariums/wuwalang">GitHub deposuna</a> bir çekme isteğiyle ya da bir sorunla ilet.</p>
+            <p>Değişikliğini <a href="https://github.com/Pulsariums/wuwalang/pulls">çekme isteğiyle</a> ya da <a href="https://github.com/Pulsariums/wuwalang/issues">bir sorunla</a> ilet.</p>
           </article>
           <article class="card">
             <h3>3. İçe aktar</h3>
-            <p>Paketleri içe aktararak kullanabilir, başka topluluk paketlerini de aynı şekilde deneyebilirsin.</p>
+            <p>Paketi içe aktar ya da repodan çek. Güncellemeden sonra yalnızca yeni metinler çevrilir.</p>
           </article>
         </div>
       </div>
@@ -190,7 +226,7 @@
         <details class="faq" open>
           <summary>Hesabım yasaklanır mı?</summary>
           <div class="faq-body">
-            <p><strong>Hesap riski vardır ve bu riski sen üstlenirsin.</strong> Oyun verilerinin değiştirilmesi Kuro Games'in kurallarına aykırıdır. Bu tür değişikliklerin nasıl değerlendirileceğini biz belirleyemeyiz, bu yüzden bir yaptırım olmayacağını garanti edemeyiz.</p>
+            <p><strong>Hesap riski vardır ve bu riski sen üstlenirsin.</strong> Oyun verilerinin değiştirilmesi Kuro Games'in Fair Play kurallarına aykırıdır. Bu tür değişikliklerin nasıl değerlendirileceğini biz belirleyemeyiz, bu yüzden bir yaptırım olmayacağını garanti edemeyiz.</p>
             <p>Ana hesabınla kullanmamanı öneririz. Riski kabul etmeyen kullanıcılar oyunu ve aracı kullanmamalıdır.</p>
           </div>
         </details>
@@ -205,44 +241,48 @@
         <details class="faq">
           <summary>Oyun güncellenince ne olur?</summary>
           <div class="faq-body">
-            <p>Önceki çeviriler yeniden kullanılır. Yalnızca yeni ya da değişen metinler çevrilir, bu da hem süreyi hem API kullanımını azaltır.</p>
+            <p>Önceki çeviriler yeniden kullanılır. Yalnızca yeni ya da değişen metinler çevrilir; bu hem süreyi hem API kullanımını azaltır.</p>
           </div>
         </details>
 
         <details class="faq">
           <summary>Nasıl kaldırılır?</summary>
           <div class="faq-body">
-            <p>Aynı tek exe dosyasını kaldırma seçeneğiyle çalıştır. WuwaLang'in kurduğu dosyalar silinir ve oyun İngilizce dile döner.</p>
+            <p>Aynı exe dosyasıyla <strong>Kaldır</strong> düğmesini kullan. WuwaLang'in kurduğu dosyalar silinir ve oyun İngilizce dile döner.</p>
           </div>
         </details>
 
         <details class="faq">
           <summary>API anahtarım güvende mi?</summary>
           <div class="faq-body">
-            <p>Anahtarlar yalnızca seçtiğin çeviri sağlayıcısına gönderilir. Mümkünse sağlayıcının panelinden anahtara harcama sınırı koymanı ve anahtarı kimseyle paylaşmamanı öneririz.</p>
+            <p>Anahtarlar yalnızca seçtiğin çeviri sağlayıcısına gönderilir. Sağlayıcının panelinden anahtara harcama sınırı koymanı ve anahtarı kimseyle paylaşmamanı öneririz.</p>
           </div>
         </details>
       </div>
     </section>
 
-    <section class="section alt" id="lisans" aria-labelledby="lisans-baslik">
+    <section class="section warn-section" aria-labelledby="uyari-baslik">
       <div class="wrap narrow">
-        <h2 id="lisans-baslik">Lisans ve atıf</h2>
-        <p>WuwaLang, <strong>GPL-3.0</strong> lisansı altında açık kaynak olarak dağıtılır. Kaynak kodunu inceleyebilir, değiştirebilir ve aynı lisansla paylaşabilirsin.</p>
-        <p>Bu proje şu çalışmalardan yararlanır ve bunlara teşekkür eder:</p>
-        <ul class="credits">
-          <li><strong>WuWaRu</strong> (GishReloaded)</li>
-          <li><strong>FModelCLI</strong></li>
-        </ul>
-        <p class="note">WuwaLang, Kuro Games tarafından onaylanmamıştır ve Kuro Games ile bağlantılı değildir. Wuthering Waves, Kuro Games'in ticari markasıdır.</p>
+        <div class="warn" role="note">
+          <h2 id="uyari-baslik">Fair Play uyarısı</h2>
+          <p>Kuro Games'in Fair Play kuralları oyun verisinin değiştirilmesini yasaklar. Bu aracın kullanımından doğabilecek riskler, hesap kısıtlaması dahil, tamamen kullanıcıya aittir. <strong>Ana hesabınla kullanma; ayrı bir hesap tercih et.</strong></p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="wrap footer-inner">
-      <span>WuwaLang, GPL-3.0</span>
-      <a href="https://github.com/Pulsariums/wuwalang">GitHub</a>
+      <div>
+        <p class="footer-brand">WuwaLang, GPL-3.0-or-later lisanslıdır.</p>
+        <p class="footer-note">Temel alınan çalışma: <a href="https://github.com/GishReloaded/WuWaRu" rel="noopener">WuWaRu</a> (GishReloaded). Oyun verisi için <a href="https://github.com/Herselfta/FModelCLI" rel="noopener">FModelCLI</a> kullanılır.</p>
+        <p class="footer-note">WuwaLang, Kuro Games tarafından onaylanmamıştır ve Kuro Games ile bağlantılı değildir. Wuthering Waves, Kuro Games'in ticari markasıdır.</p>
+      </div>
+      <nav class="footer-links" aria-label="Bağlantılar">
+        <a href="https://github.com/Pulsariums/wuwalang" rel="noopener">GitHub</a>
+        <a href="https://github.com/Pulsariums/wuwalang/releases">Releases</a>
+        <a href="https://github.com/Pulsariums/wuwalang/blob/main/LICENSE" rel="noopener">Lisans</a>
+      </nav>
     </div>
   </footer>
 </body>
