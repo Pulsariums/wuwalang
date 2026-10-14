@@ -101,6 +101,17 @@ impl Engine for OpenAiCompatEngine {
         let data: Value = serde_json::from_str(&text).map_err(|_| {
             EngineError::Other("OpenAI uyumlu yanıt beklenen biçimde değil.".into())
         })?;
+        if data
+            .get("choices")
+            .and_then(|choices| choices.get(0))
+            .and_then(|choice| choice.get("finish_reason"))
+            .and_then(Value::as_str)
+            == Some("length")
+        {
+            return Err(EngineError::Other(
+                "Yanıt token sınırında kesildi; batch.max_chars değerini düşürün.".into(),
+            ));
+        }
         let content = data
             .get("choices")
             .and_then(|choices| choices.get(0))

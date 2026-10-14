@@ -15,7 +15,10 @@ pub const DEFAULT_PACK_URL: &str =
     "https://raw.githubusercontent.com/Pulsariums/wuwalang/main/packs/{lang}";
 
 pub fn project_dir() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+    std::env::current_exe()
+        .ok()
+        .and_then(|exe| exe.parent().map(Path::to_path_buf))
+        .unwrap_or_else(|| PathBuf::from("."))
 }
 
 pub fn default_path() -> PathBuf {
@@ -185,6 +188,9 @@ pub fn load(path: &Path, env: &HashMap<String, String>) -> Result<Config> {
     }
     let mut cfg: Config = serde_json::from_value(merged).context("config.json okunamadı")?;
     cfg.target = lang::validate(&cfg.target)?.code.to_string();
+    if cfg.batch.max_items == 0 || cfg.batch.max_chars == 0 || cfg.batch.threads == 0 {
+        bail!("batch değerleri 0'dan büyük olmalı.");
+    }
     if !ENGINES.contains(&cfg.engine.as_str()) {
         bail!(
             "Bilinmeyen motor: {}. Seçenekler: {}",

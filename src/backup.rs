@@ -260,7 +260,6 @@ pub fn prune(root: &Path, code: &str) -> Result<usize> {
 /// Seçilen yedeği TM yapar. Önce mevcut TM yedeklenir (dönen değer bu yedektir).
 pub fn restore(root: &Path, code: &str, backup: &Path, tm_path: &Path) -> Result<Option<Info>> {
     count_rows(backup).context("Yedek dosyası okunamadı veya geçersiz.")?;
-    let pre = create(root, code, tm_path, true)?;
     let name = tm_path
         .file_name()
         .context("TM yolu geçersiz.")?
@@ -268,6 +267,7 @@ pub fn restore(root: &Path, code: &str, backup: &Path, tm_path: &Path) -> Result
         .into_owned();
     let temp = tm_path.with_file_name(format!("{name}.restoring"));
     fs::copy(backup, &temp)?;
+    let pre = create(root, code, tm_path, true)?;
     fs::rename(&temp, tm_path)?;
     Ok(pre)
 }

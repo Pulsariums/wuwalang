@@ -251,7 +251,10 @@ where
         if attempt == attempts {
             return Err(error);
         }
-        let wait = retry_after.unwrap_or_else(|| 60f64.min(2f64.powi(attempt as i32)));
+        let wait = retry_after
+            .filter(|w| w.is_finite() && *w >= 0.0)
+            .map(|w| w.min(120.0))
+            .unwrap_or_else(|| 60f64.min(2f64.powi(attempt as i32)));
         log(&format!(
             "Geçici hata, {wait:.0} sn sonra yeniden denenecek ({attempt}/{attempts})."
         ));

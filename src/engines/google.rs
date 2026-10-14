@@ -54,9 +54,11 @@ impl Engine for GoogleEngine {
     ) -> Result<BatchResult, EngineError> {
         let texts: Vec<&str> = items.iter().map(|item| item.text.as_str()).collect();
         let body = json!({"q": texts, "source": "en", "target": self.target, "format": "text"});
-        let url = format!("{URL}?key={}", percent_encode(&self.api_key));
-        let headers = vec![("Content-Type".to_string(), "application/json".to_string())];
-        let (status, text, retry_after) = self.http.post_json(&url, &headers, &body)?;
+        let headers = vec![
+            ("Content-Type".to_string(), "application/json".to_string()),
+            ("x-goog-api-key".to_string(), self.api_key.clone()),
+        ];
+        let (status, text, retry_after) = self.http.post_json(URL, &headers, &body)?;
         check_response(status, &text, retry_after)?;
         let data: Value = serde_json::from_str(&text)
             .map_err(|_| EngineError::Other("Google yanıtı beklenen biçimde değil.".into()))?;
@@ -89,17 +91,6 @@ impl Engine for GoogleEngine {
             ..BatchResult::default()
         })
     }
-}
-
-fn percent_encode(raw: &str) -> String {
-    raw.bytes()
-        .map(|byte| match byte {
-            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => {
-                char::from(byte).to_string()
-            }
-            other => format!("%{other:02X}"),
-        })
-        .collect()
 }
 
 /// Yaygın HTML varlıklarını çözer (adlandırılmış: amp, lt, gt, quot, apos, nbsp; sayısal: &#N; ve &#xH;).
@@ -179,7 +170,8 @@ mod tests {
         let result = engine.translate_batch(&items(), &[], "").unwrap();
         let calls = http.calls.lock().unwrap();
         assert!(calls[0].url.starts_with(URL));
-        assert!(calls[0].url.ends_with("?key=GKEY"));
+        assert_eq!(calls[0].url, URL);
+        assert!(calls[0].headers.iter().any(|(k, v)| k == "x-goog-api-key" && v == "GKEY"));
         assert_eq!(
             calls[0].body,
             json!({"q": ["Hello", "World"], "source": "en", "target": "tr", "format": "text"})

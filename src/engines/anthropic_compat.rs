@@ -97,6 +97,11 @@ impl Engine for AnthropicCompatEngine {
         check_response(status, &text, retry_after)?;
         let data: Value = serde_json::from_str(&text)
             .map_err(|_| EngineError::Other("Anthropic yanıtı beklenen biçimde değil.".into()))?;
+        if data.get("stop_reason").and_then(Value::as_str) == Some("max_tokens") {
+            return Err(EngineError::Other(
+                "Yanıt token sınırında kesildi; batch.max_chars değerini düşürün.".into(),
+            ));
+        }
         let blocks = data
             .get("content")
             .and_then(Value::as_array)

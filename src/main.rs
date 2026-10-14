@@ -251,7 +251,9 @@ fn run(cli: Cli) -> Result<ExitCode> {
 
 fn load_config(path: Option<&Path>) -> Result<Config> {
     let path = path.map_or_else(config::default_path, Path::to_path_buf);
-    let env: HashMap<String, String> = std::env::vars().collect();
+    let env: HashMap<String, String> = std::env::vars_os()
+        .filter_map(|(k, v)| Some((k.into_string().ok()?, v.into_string().ok()?)))
+        .collect();
     config::load(&path, &env)
 }
 

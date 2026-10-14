@@ -34,7 +34,10 @@ pub fn atomic_json<T: Serialize + ?Sized>(path: &Path, value: &T) -> Result<()> 
     let mut tmp_name = path.as_os_str().to_owned();
     tmp_name.push(".tmp");
     let tmp = PathBuf::from(tmp_name);
-    fs::write(&tmp, serde_json::to_string_pretty(value)?)?;
+    let mut file = fs::File::create(&tmp)?;
+    std::io::Write::write_all(&mut file, serde_json::to_string_pretty(value)?.as_bytes())?;
+    file.sync_all()?;
+    drop(file);
     fs::rename(&tmp, path)?;
     Ok(())
 }

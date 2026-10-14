@@ -329,7 +329,10 @@ fn write_json_atomic(path: &Path, value: &Json) -> Result<()> {
         fs::create_dir_all(parent)?;
     }
     let tmp = PathBuf::from(format!("{}.tmp", path.display()));
-    fs::write(&tmp, serde_json::to_vec_pretty(value)?)?;
+    let mut file = File::create(&tmp)?;
+    std::io::Write::write_all(&mut file, &serde_json::to_vec_pretty(value)?)?;
+    file.sync_all()?;
+    drop(file);
     fs::rename(&tmp, path)?;
     Ok(())
 }
@@ -651,7 +654,7 @@ impl Project {
         let source = self.source();
         if !force
             && stamp.exists()
-            && read_json(&stamp)?.get("signature").and_then(Json::as_str) == Some(current.as_str())
+            && read_json(&stamp).is_ok_and(|m| m.get("signature").and_then(Json::as_str) == Some(current.as_str()))
             && source.join("lang_multi_text.db").is_file()
         {
             (self.log)("Metin sürümü değişmedi; yerel veritabanları kullanılıyor.");
@@ -693,10 +696,23 @@ impl Project {
             fs::remove_dir_all(&fresh)?;
         }
         copy_tree(&extracted, &fresh)?;
-        if source.exists() {
-            fs::remove_dir_all(&source)?;
+        let source_old = self.data().join("source-old");
+        if source_old.exists() {
+            fs::remove_dir_all(&source_old)?;
         }
-        fs::rename(&fresh, &source)?;
+        let had_source = source.exists();
+        if had_source {
+            fs::rename(&source, &source_old)?;
+        }
+        if let Err(error) = fs::rename(&fresh, &source) {
+            if had_source {
+                let _ = fs::rename(&source_old, &source);
+            }
+            return Err(error.into());
+        }
+        if had_source {
+            fs::remove_dir_all(&source_old)?;
+        }
         let manifest = json!({
             "signature": current,
             "resource_version": resources.file_name().and_then(OsStr::to_str).unwrap_or_default(),
@@ -725,7 +741,7 @@ impl Project {
         for (i, parent) in parents.iter().enumerate() {
             let target = std::path::absolute(stage.join(format!("{i:03}")))?;
             let script = format!(
-                "New-Item -ItemType Junction -Path {} -Target {} | Out-Null",
+                "New-Item -ItemType Junction -Path {} -Target {} -ErrorAction Stop | Out-Null",
                 literal(&target),
                 literal(&std::path::absolute(parent)?)
             );

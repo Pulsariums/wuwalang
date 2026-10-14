@@ -275,8 +275,11 @@ impl Glossary {
         if !is_valid_term(term, tr) {
             bail!("Geçersiz terim: en fazla 4 kelime ve cümle işareti içermeyen bir isim girin.");
         }
+        let key = self
+            .find_key(term.trim())
+            .unwrap_or_else(|| term.trim().to_string());
         self.set(
-            term.trim().to_string(),
+            key,
             Entry {
                 tr: tr.trim().to_string(),
                 locked,

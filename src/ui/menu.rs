@@ -330,6 +330,13 @@ impl Menu {
                         }
                     }
                     self.log.push_str(&text);
+                    if self.log.len() > 200_000 {
+                        let mut cut = self.log.len() - 100_000;
+                        while !self.log.is_char_boundary(cut) {
+                            cut += 1;
+                        }
+                        self.log.drain(..cut);
+                    }
                 }
                 Msg::Progress { fraction, text } => self.progress = Some((fraction, text)),
                 Msg::Done { label, result } => {
@@ -1319,6 +1326,10 @@ Otomatik yedek çeviri sonunda ve Kur/Kaldır/Derle öncesinde alınır.",
 
     /// Sözlük dosyasını açıp işlemi uygular, ardından listeyi yeniler.
     fn edit_glossary(&mut self, op: impl FnOnce(&mut Glossary) -> Result<String>) {
+        if self.busy {
+            self.g_msg = "Çeviri sürerken sözlük düzenlenemez.".into();
+            return;
+        }
         let result = Glossary::open(&state::glossary_path(self.lang)).and_then(|mut glossary| op(&mut glossary));
         match result {
             Ok(message) => {
@@ -1431,6 +1442,10 @@ Otomatik yedek çeviri sonunda ve Kur/Kaldır/Derle öncesinde alınır.",
     }
 
     fn save_manual(&mut self, source: String, text: String) {
+        if self.busy {
+            self.e_msg = "Çeviri sürerken sözlük düzenlenemez.".into();
+            return;
+        }
         if text.trim().is_empty() {
             self.e_msg = "Çeviri boş olamaz.".into();
             return;
@@ -1456,6 +1471,10 @@ Otomatik yedek çeviri sonunda ve Kur/Kaldır/Derle öncesinde alınır.",
     }
 
     fn reset_entry(&mut self, source: String) {
+        if self.busy {
+            self.e_msg = "Çeviri sürerken sözlük düzenlenemez.".into();
+            return;
+        }
         let result = TranslationMemory::open(&state::tm_path(self.lang))
             .and_then(|tm| tm.reset(&source));
         match result {
@@ -1728,7 +1747,8 @@ fn pull_pack_job(cfg: Config, url: &str, rep: &Reporter) -> Result<()> {
         None
     };
     let tm = TranslationMemory::open(&state::tm_path(state::active_lang(&cfg)))?;
-    let stats = pull_pack(url, &tm, quads.as_deref(), &|text: &str| log(text))?;
+    let url = lang::pack_url_for(url, state::active_lang(&cfg));
+    let stats = pull_pack(&url, &tm, quads.as_deref(), &|text: &str| log(text))?;
     log(&format!(
         "Repodan çekildi: {} dosya tarandı, {} indirildi, {} satır alındı, {} atlandı.",
         stats.files, stats.downloaded, stats.imported, stats.skipped
@@ -1770,9 +1790,9 @@ fn install_all(cfg: Config, rep: &Reporter) -> Result<()> {
         "Topluluk paketi: {} satır alındı, {} atlandı.",
         imported.imported, imported.skipped
     ));
-    let url = cfg.pack_url.trim();
+    let url = lang::pack_url_for(&cfg.pack_url, state::active_lang(&cfg));
     if !url.is_empty() {
-        match pull_pack(url, &tm, Some(quads.as_slice()), &|text: &str| log(text)) {
+        match pull_pack(&url, &tm, Some(quads.as_slice()), &|text: &str| log(text)) {
             Ok(stats) => log(&format!(
                 "Repodan paket: {} dosya indirildi, {} satır alındı.",
                 stats.downloaded, stats.imported
